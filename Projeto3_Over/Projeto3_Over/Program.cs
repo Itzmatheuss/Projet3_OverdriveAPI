@@ -1,8 +1,11 @@
 
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Projeto3_Over.Data;
+using Projeto3_Over.Models;
 using Projeto3_Over.Repositorios;
 using Projeto3_Over.Repositorios.Interfaces;
+using Projeto3_Over.Validators;
 
 namespace Projeto3_Over
 {
@@ -25,6 +28,8 @@ namespace Projeto3_Over
 
             builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             builder.Services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
+            builder.Services.AddTransient<IValidator<EmpresaModel>, EmpresaValidator>();
+            builder.Services.AddTransient<IValidator<UsuarioModel>, UsuarioValidator>();
 
 
             var app = builder.Build();

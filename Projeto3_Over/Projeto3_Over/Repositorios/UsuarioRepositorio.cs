@@ -29,28 +29,22 @@ namespace Projeto3_Over.Repositorios
 
         public async Task<UsuarioModel> GetUserById(int id)
         {
-            return await _dbContext.Usuarios.Include(u=> u.Empresa).FirstOrDefaultAsync(u => u.Id == id);
+            return await _dbContext.Usuarios.Include(u => u.Empresa).FirstOrDefaultAsync(u => u.Id == id);
+        }
+        public async Task<UsuarioModel> GetUserByCpf(string cpf)
+        {
+            return await _dbContext.Usuarios.FirstOrDefaultAsync(u => u.CPF == cpf);
+        }
+        public async Task<UsuarioModel> GetUserByPhone(string phone)
+        {
+            return await _dbContext.Usuarios.FirstOrDefaultAsync(u => u.Telefone == phone);
         }
 
-        public Task<UsuarioModel> GetUserByCPF(string cpf)
+        public async Task<UsuarioModel> GetLastAddedUser()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Usuarios.OrderByDescending(u => u.Id).FirstOrDefaultAsync();
         }
 
-        public Task<UsuarioModel> GetUserByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UsuarioModel> GetUserByStatus(StatusAtual status)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<UsuarioModel> GetUsersByEmpresa(string empresa)
-        {
-            throw new NotImplementedException();
-        }
         public async Task<UsuarioModel> Adicionar(UsuarioModel usuario)
         {
             _dbContext.Usuarios.Add(usuario);
@@ -64,8 +58,9 @@ namespace Projeto3_Over.Repositorios
 
             if (usuarioId == null)
             {
-               throw new Exception("Usuário não encontrado");
+                throw new Exception("Usuário não encontrado");
             }
+
 
             usuarioId.Nome = usuario.Nome;
             usuarioId.UserName = usuario.UserName;
@@ -73,6 +68,8 @@ namespace Projeto3_Over.Repositorios
             usuarioId.Telefone = usuario.Telefone;
             usuarioId.Status = usuario.Status;
             usuarioId.EmpresaId = usuario.EmpresaId;
+
+
 
             _dbContext.Usuarios.Update(usuarioId);
             await _dbContext.SaveChangesAsync();

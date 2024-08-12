@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projeto3_Over.Data;
 
@@ -11,9 +12,11 @@ using Projeto3_Over.Data;
 namespace Projeto3_Over.Migrations
 {
     [DbContext(typeof(Projeto3DBContext))]
-    partial class Projeto3DBContextModelSnapshot : ModelSnapshot
+    [Migration("20240812131207_Decimal")]
+    partial class Decimal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -2,6 +2,7 @@
 using Projeto3_Over.Data;
 using Projeto3_Over.Enums;
 using Projeto3_Over.Models;
+using Projeto3_Over.Models.Error;
 using Projeto3_Over.Repositorios.Interfaces;
 
 namespace Projeto3_Over.Repositorios
@@ -25,24 +26,12 @@ namespace Projeto3_Over.Repositorios
         {
             return await _dbContext.Empresas.FirstOrDefaultAsync(e => e.Id == id);
         }
-        public Task<EmpresaModel> GetEmpresaByCity(string cidade)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<EmpresaModel> GetEmpresaByCnpj(string cnpj)
+        public async Task<List<EmpresaModel>> GetEmpresasByStatus(StatusAtual status)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<EmpresaModel> GetEmpresaByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<EmpresaModel> GetEmpresaByStatus(StatusAtual status)
-        {
-            throw new NotImplementedException();
+            return await _dbContext.Empresas
+                                  .Where(e => e.Status == status)
+                                  .ToListAsync();
         }
         public async Task<EmpresaModel> Adicionar(EmpresaModel empresa)
         {
@@ -51,6 +40,20 @@ namespace Projeto3_Over.Repositorios
 
             return empresa;
         }
+        public async Task<EmpresaModel> GetEmpresaByCnpj(string cnpj)
+        {
+            return await _dbContext.Empresas.FirstOrDefaultAsync(e => e.CNPJ == cnpj);
+        }
+
+        public async Task<List<EmpresaModel>> GetEmpresasByEstado(string estado)
+        {
+            return await _dbContext.Empresas.Where(e => e.Estado == estado).ToListAsync();
+        }
+        public async Task<EmpresaModel> GetEmpresaByPhone(string phone)
+        {
+            return await _dbContext.Empresas.FirstOrDefaultAsync(e => e.Telefone == phone);
+        }
+
         public async Task<EmpresaModel> Atualizar(EmpresaModel empresa, int id)
         {
             
@@ -84,6 +87,17 @@ namespace Projeto3_Over.Repositorios
 
             return empresaId;
         }
+        public async Task<bool> AtualizarStatusUsuariosEmpresa(int id, StatusAtual novoStatus)
+        {
+            var usuarios = await _dbContext.Usuarios.Where(u => u.EmpresaId == id).ToListAsync();
+            foreach (var usuario in usuarios)
+            {
+                usuario.Status = novoStatus;
+            }
+            _dbContext.Usuarios.UpdateRange(usuarios);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
 
         public async Task<bool> Apagar(int id)
         {
@@ -91,7 +105,7 @@ namespace Projeto3_Over.Repositorios
 
             if (empresaId == null)
             {
-                throw new Exception("Empresa não encontrada");
+                return false;
             }
 
             var usuarios = await _dbContext.Usuarios.Where(u => u.EmpresaId == id).ToListAsync();

@@ -8,9 +8,9 @@ namespace Projeto3_Over.Extensions
     {
         public static string GetDescription(this Enum value)
         {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
+            FieldInfo descricao = value.GetType().GetField(value.ToString());
 
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])descricao.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             if (attributes != null && attributes.Length > 0)
             {

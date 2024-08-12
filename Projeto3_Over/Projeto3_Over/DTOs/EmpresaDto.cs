@@ -7,7 +7,7 @@
         public required string CNPJ { get; set; }
         public required string Cidade { get; set; }
         public required string Telefone { get; set; }
-        public required string Capital { get; set; }
+        public required decimal Capital { get; set; }
         public required string Status { get; set; }
     }
 }

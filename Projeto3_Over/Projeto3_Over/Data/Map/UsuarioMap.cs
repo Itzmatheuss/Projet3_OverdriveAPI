@@ -13,6 +13,7 @@ namespace Projeto3_Over.Data.Map
             builder.Property(u => u.Nome).IsRequired().HasMaxLength(100);
             builder.Property(u => u.UserName).IsRequired().HasMaxLength(100);
             builder.Property(u => u.CPF).IsRequired().HasMaxLength(11);
+            builder.HasIndex(u => u.CPF).IsUnique();
             builder.Property(u => u.Telefone).IsRequired().HasMaxLength(20);
             builder.Property(u => u.Status).IsRequired().HasConversion<int>();
             builder.Property(u => u.EmpresaId).IsRequired(false);

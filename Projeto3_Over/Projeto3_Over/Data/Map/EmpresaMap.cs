@@ -13,7 +13,8 @@ namespace Projeto3_Over.Data.Map
             builder.Property(e => e.Nome).IsRequired().HasMaxLength(100);
             builder.Property(e => e.NomeFantasia).IsRequired().HasMaxLength(100);
             builder.Property(e => e.CNPJ).IsRequired().HasMaxLength(14);
-            builder.Property(e => e.DataCadastro).IsRequired();
+            builder.HasIndex(e => e.CNPJ).IsUnique();
+            builder.Property(e => e.DataCadastro).IsRequired(false);
             builder.Property(e => e.Cnae).IsRequired().HasMaxLength(6);
             builder.Property(e => e.NaturezaJuridica).IsRequired().HasMaxLength(100);
             builder.Property(e => e.Cep).IsRequired().HasMaxLength(8);
@@ -22,7 +23,7 @@ namespace Projeto3_Over.Data.Map
             builder.Property(e => e.Bairro).IsRequired().HasMaxLength(100);
             builder.Property(e => e.Numero).IsRequired().HasMaxLength(100);
             builder.Property(e => e.Estado).IsRequired().HasMaxLength(2);
-            builder.Property(e => e.Complemento).HasMaxLength(100);
+            builder.Property(e => e.Complemento).HasMaxLength(200);
             builder.Property(e => e.Telefone).IsRequired().HasMaxLength(20);
             builder.Property(e => e.Capital).IsRequired().HasMaxLength(255);
             builder.Property(e => e.Status).IsRequired().HasConversion<int>();
