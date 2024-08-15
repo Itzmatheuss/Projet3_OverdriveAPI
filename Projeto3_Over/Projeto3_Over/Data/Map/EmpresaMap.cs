@@ -25,7 +25,7 @@ namespace Projeto3_Over.Data.Map
             builder.Property(e => e.Estado).IsRequired().HasMaxLength(2);
             builder.Property(e => e.Complemento).HasMaxLength(200);
             builder.Property(e => e.Telefone).IsRequired().HasMaxLength(20);
-            builder.Property(e => e.Capital).IsRequired().HasMaxLength(255);
+            builder.Property(e => e.Capital).IsRequired().HasColumnType("decimal(18,2)");
             builder.Property(e => e.Status).IsRequired().HasConversion<int>();
          
 

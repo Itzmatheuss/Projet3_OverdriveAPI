@@ -109,7 +109,7 @@ namespace Projeto3_Over.Migrations
                     b.HasIndex("CNPJ")
                         .IsUnique();
 
-                    b.ToTable("Empresas");
+                    b.ToTable("Empresas", (string)null);
                 });
 
             modelBuilder.Entity("Projeto3_Over.Models.UsuarioModel", b =>
@@ -153,7 +153,7 @@ namespace Projeto3_Over.Migrations
 
                     b.HasIndex("EmpresaId");
 
-                    b.ToTable("Usuarios");
+                    b.ToTable("Usuarios", (string)null);
                 });
 
             modelBuilder.Entity("Projeto3_Over.Models.UsuarioModel", b =>

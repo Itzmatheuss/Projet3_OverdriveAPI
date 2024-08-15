@@ -170,6 +170,18 @@ namespace Projeto3_Over.Controllers
 
             return Ok(usuarioAtualizado);
         }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> Apagar(int id)
+        {
+
+            bool usuario = await _usuarioRepositorio.Apagar(id);
+            if (!usuario)
+            {
+                return BadRequest("Usuario não encontrado");
+            }
+
+            return Ok(true);
+        }
 
     }
 }
