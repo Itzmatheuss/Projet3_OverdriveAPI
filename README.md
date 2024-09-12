@@ -1,4 +1,4 @@
-# API de Gestão de Usuários
+# API de Gestão de Empresas e Usuários
 
 Esta é uma API RESTful desenvolvida em C# utilizando o ASP.NET Core no Visual Studio. A API oferece funcionalidades para gerenciamento de usuários, incluindo operações de CRUD (Criar, Ler, Atualizar, Deletar). O projeto utiliza um banco de dados SQL Server embutido (localdb).
 
